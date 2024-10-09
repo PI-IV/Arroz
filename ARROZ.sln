@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ARROZ", "ARROZ\ARROZ.csproj", "{251733C4-606C-4028-857C-2C2B7822EA6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{251733C4-606C-4028-857C-2C2B7822EA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251733C4-606C-4028-857C-2C2B7822EA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251733C4-606C-4028-857C-2C2B7822EA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251733C4-606C-4028-857C-2C2B7822EA6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3CAA863-44F5-4EC8-BA09-5D5957A33E66}
+	EndGlobalSection
+EndGlobal

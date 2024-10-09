@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PI IV</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ARROZ.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/fontawesome-free-6.3.0-web/fontawesome-free-6.3.0-web/css/all.css" />
+    <script src="~/lib/ajax/jquery.min.js"></script>
+    <script src="~/lib/jquery/jquery.maskMoney.min.js"></script>
+    <link rel="stylesheet" href="~/lib/dataTable/jquery.dataTables.min.css" />
+    <script src="~/lib/dataTable/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body >
+    <div id=""></div>
+    <header class="">
+        <nav class="header-catalogo navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 py-1" >
+            <div class="container-fluid">
+                @*<div>
+                    <button class="btn"><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Login" onclick="loading.style.display = 'block';"><img src="~/img/logo-plant3.png" id="logo" style="width:100%;" /></a></button>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="color:white"></span>
+                </button>
+                <div class="navbar-collapse collapse  justify-content-center align-items-center" id="navbarNav">
+                    <ul class="navbar-nav justify-content-between align-items-center">
+                        <li class="nav-item">
+                            <button class="btn"><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" onclick="loading.style.display = 'block';">CATÁLOGO</a></button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn"><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="History" onclick="loading.style.display = 'block';">GRUPO PI</a></button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn"><a class="navbar-brand" asp-area="" asp-controller="Catalogo" asp-action="Scanner" onclick="loading.style.display = 'block';">SCANNER</a></button>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#meuModal">
+                                <i class="fa-solid fa-info" style="color:black"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>*@
+            </div>
+        </nav>
+    </header>
+
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="meuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Informações da Página</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    O Plant ID é um software de Identificação e Controle de Árvores Urbanas da cidade de Limeira
+ 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="container">*@
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+   
+    <div id="magnifyingGlass"></div>
+    <div id="loading" class="translate-middle">
+        <i class="fa-solid fa-spinner fa-spin fa-10x" style="--fa-animation-duration: 4s;"></i>
+    </div>
+    <div>
+        @*<img src="~/img/logo-plant3.png" id="logo-back" class="translate-middle" style="height:29vw"/>*@
+    </div>
+    <footer class="border-top text-muted d-flex justify-content-center align-items-center" style="z-index:-1;  bottom:0; width:100%">
+        <div class="">
+            <p> &copy; 2024 - Projeto Integrador IV -  DRP04-PJI410-SALA-001GRUPO-005 </p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script>
+
+    var loading = document.getElementById("loading");
+    window.onload = function () {
+        loading.style.display = "none";
+    }
+</script>
+
+<script>
+    document.addEventListener('mousemove', function (e) {
+        const magnifyingGlass = document.getElementById('magnifyingGlass');
+        if (magnifyingGlass.style.display === 'block') {
+            magnifyingGlass.style.left = e.pageX - magnifyingGlass.offsetWidth / 2 + 'px';
+            magnifyingGlass.style.top = e.pageY - magnifyingGlass.offsetHeight / 2 + 'px';
+            magnifyingGlass.style.backgroundPosition = `${-e.pageX * 2}px ${-e.pageY * 2}px`; // Adjust the magnification level
+        }
+    });
+
+    document.addEventListener('wheel', function (e) {
+        if (e.ctrlKey) {
+            e.preventDefault();
+            const magnifyingGlass = document.getElementById('magnifyingGlass');
+            magnifyingGlass.style.display = 'block';
+            magnifyingGlass.style.backgroundImage = `url('your-image-url')`; // Change 'your-image-url' to the image URL you want to magnify
+        }
+    });
+
+    document.addEventListener('keyup', function (e) {
+        if (!e.ctrlKey) {
+            const magnifyingGlass = document.getElementById('magnifyingGlass');
+            magnifyingGlass.style.display = 'none';
+        }
+    });
+
+</script>
