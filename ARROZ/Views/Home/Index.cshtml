@@ -18,15 +18,15 @@
         <div class="">
             <canvas id="myChart" style="width:90%; height:70vh"></canvas>
         </div>
-
+        <br>
             <div class="">
                 <canvas id="myChart1" style="width:90%; height:70vh"></canvas>
             </div>
-
+            <br>
             <div class="">
                 <canvas id="myChart2" style="width:90%; height:70vh"></canvas>
             </div>
-
+            <br>
         <div class="">
                 <canvas id="myChart3" style="width:90%; height:70vh"></canvas>
             </div>
@@ -52,13 +52,7 @@
 </script>
 
 <script>
-    const xValues = ["2013-01", "2013-02", "2013-03", "2013-04","2013-05","2013-06",
-"2013-07",
-"2013-08",
-"2013-09",
-"2013-10",
-"2013-11",
-"2013-12",
+    const xValues = [
 "2014-01",
 "2014-02",
 "2014-03",
@@ -186,6 +180,12 @@
     var list = JSON.parse('@Html.Raw(JsonSerializer.Serialize(Model))');
     //alert(JSON.stringify(list));
 
+
+    var consumomedia = [];
+    var precoarrozmedia = [];
+    var salariomedia = [];
+    var precodolarmedia = [];
+
     
     var i = 0;
     while (i < xValues.length) {
@@ -236,6 +236,30 @@
         }
         i++;
     }
+
+    const sumc = consumo.reduce((a, b) => a + b, 0);
+    const avgc = (sumc / consumo.length) || 0;
+    
+    const sumpa = precoarroz.reduce((a, b) => a + b, 0);
+    const avgpa = (sumpa / precoarroz.length) || 0;
+    
+    const sumpd = precodolar.reduce((a, b) => a + b, 0);
+    const avgpd = (sumpd / precodolar.length) || 0;
+
+    const sums = salario.reduce((a, b) => a + b, 0);
+    const avgs = (sums / salario.length) || 0;
+
+    i = 0;
+    while (i < xValues.length) {
+
+        consumomedia.push(avgc);
+        precoarrozmedia.push(avgpa);
+        salariomedia.push(avgs);
+        precodolarmedia.push(avgpd);
+        i++;
+    }
+
+
     //alert(consumo);
     new Chart("myChart", {
     type: "line",
@@ -342,6 +366,24 @@
                     borderColor: "violet",
                     data: precodolar,
                     yAxisID: 'y-axis-2'
+                },
+                {
+                    fill: false,
+                    label: 'Média do Preço do Arroz',
+                    lineTension: 0.1,
+                    backgroundColor: "#ed9a01",
+                    borderColor: "#ed9a01",
+                    data: precoarrozmedia,
+                    yAxisID: 'y-axis-1'
+                },
+                {
+                    fill: false,
+                    label: 'Média do Preço do Dólar',
+                    lineTension: 0.1,
+                    backgroundColor: "#230c44",
+                    borderColor: "#230c44",
+                    data: precodolarmedia,
+                    yAxisID: 'y-axis-2'
                 }
             ]
         },
@@ -403,9 +445,27 @@
                     fill: false,
                     label: 'Cosumo Médio',
                     lineTension: 0.1,
-                    backgroundColor: "violet",
-                    borderColor: "violet",
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,1.0)",
                     data: consumo,
+                    yAxisID: 'y-axis-2'
+                },
+                {
+                    fill: false,
+                    label: 'Média do Preço do Arroz',
+                    lineTension: 0.1,
+                    backgroundColor: "#ed9a01",
+                    borderColor: "#ed9a01",
+                    data: precoarrozmedia,
+                    yAxisID: 'y-axis-1'
+                },
+                {
+                    fill: false,
+                    label: 'Média do Cosumo Médio',
+                    lineTension: 0.1,
+                    backgroundColor: "#230c44",
+                    borderColor: "#230c44",
+                    data: consumomedia,
                     yAxisID: 'y-axis-2'
                 }
             ]
@@ -468,9 +528,27 @@
                     fill: false,
                     label: 'Salário Mínimo',
                     lineTension: 0.1,
-                    backgroundColor: "violet",
-                    borderColor: "violet",
+                    backgroundColor: "green",
+                    borderColor: "green",
                     data: salario,
+                    yAxisID: 'y-axis-2'
+                },
+                {
+                    fill: false,
+                    label: 'Média do Preço do Arroz',
+                    lineTension: 0.1,
+                    backgroundColor: "#ed9a01",
+                    borderColor: "#ed9a01",
+                    data: precoarrozmedia,
+                    yAxisID: 'y-axis-1'
+                },
+                {
+                    fill: false,
+                    label: 'Média do Salário Mínimo',
+                    lineTension: 0.1,
+                    backgroundColor: "#230c44",
+                    borderColor: "#230c44",
+                    data: salariomedia,
                     yAxisID: 'y-axis-2'
                 }
             ]
@@ -521,7 +599,7 @@
 
 
 
-<script>
+@*<script>
         let CreateDOMObjects = () => {
         const DOM = `
             <div vw class="enabled">
@@ -547,7 +625,7 @@
             ImportScriptFile();
         });
     })();
-</script>
+</script>*@
 
 
 
