@@ -74,7 +74,10 @@ namespace ARROZ.Repository
             Common mod = new Common();
             using (SqlConnection con = new SqlConnection(con_ARROZ))
             {
-                string queryString = "SELECT ANO_MES, VALOR_BR FROM PREÇO_ARROZ_50KG  ORDER BY ANO_MES ASC";
+                //string queryString = "SELECT ANO_MES, VALOR_BR FROM PREÇO_ARROZ_50KG  ORDER BY ANO_MES ASC";
+                string queryString = @"SELECT ANO_MES, AVG(VALOR_BR) FROM PREÇO_ARROZ_5KG
+                                        WHERE VALOR_BR > 0
+                                        GROUP BY ANO_MES";
                 SqlCommand cmd = new SqlCommand(queryString, con);
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
